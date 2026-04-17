@@ -93,7 +93,7 @@ type OnlineGame = {
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000/api";
-const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, "");
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || API_BASE_URL.replace(/\/api\/?$/, "");
 const PIECE_VALUES: Record<string, number> = {
   p: 100,
   n: 320,
@@ -443,7 +443,7 @@ export default function Home() {
       return;
     }
 
-    const socket = io(API_ORIGIN, {
+    const socket = io(SOCKET_URL, {
       withCredentials: true,
       transports: ["websocket", "polling"],
     });
